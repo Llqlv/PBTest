@@ -1,0 +1,31 @@
+type User {
+    id: ID!
+    phoneNumber: String!
+    firstName: String
+    lastName: String
+    isVerified: Boolean!
+}
+
+
+type Query {
+    getUsers: [User!]
+    checkPhoneNumber(phoneNumber: String): AuthStep
+}
+
+type Mutation {
+    authenticateExistingUser(phoneNumber: String!, password: String!): Boolean!
+    registerNewUser(
+        phoneNumber: String!,
+        password: String!,
+        firstName: String!,
+        lastName: String!
+    ): User!
+    verifySmsCode(phoneNumber: String!, code: String!): Boolean!
+}
+
+enum AuthStep {
+    EXISTING_USER
+    NEW_USER
+}
+
+
